@@ -46,10 +46,6 @@ your task:
         check each source file for things being included that aren't used.
  */
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <cassert>
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
@@ -64,6 +60,15 @@ your task:
 
  Wait for my code review.
  */
+
+#include <iostream>
+#include <vector>
+#include "Car.h"
+#include "Highway.h"
+#include "HighwayPatrol.h"
+#include "Motorcycle.h"
+#include "SemiTruck.h"
+#include "Vehicle.h"
 
 int main()
 {
@@ -115,20 +120,37 @@ int main()
     /*
      construct 2 more Car instances via emplace_back.
      */
-    
+    cars.emplace_back("phil");
+    cars.emplace_back("angela");
     /*
      now reserve and emplace_back your Trucks and Motorcyles
      */
+    motorcycles.reserve(2);
+    motorcycles.emplace_back("jerry");
+    motorcycles.emplace_back("george");
+
+    trucks.reserve(4);
+    trucks.emplace_back("kramer");
+    trucks.emplace_back("elaine");
+    trucks.emplace_back("newman");
+    trucks.emplace_back("estelle");
     
     
-    
-    
-    assert(false);
+    //assert(false);
     //add the cars, motorcycles and trucks to the highway using range-based for() loops: for( element : vec ) { ... }
     //be careful to not accidentally make element copies when iterating.
     
     HighwayPatrol cop;
     cop.scanHighway(&highway);
+
+    for( Car& car : cars )
+        highway.addVehicle( &car );
+
+    for( Motorcycle& motorcycle : motorcycles )
+        highway.addVehicle( &motorcycle );
+
+    for( SemiTruck& truck : trucks )
+        highway.addVehicle( &truck );
 
     std::cout << "done" << std::endl;
 
